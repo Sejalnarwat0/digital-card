@@ -37,20 +37,6 @@
         animation: backgroundMotion 30s ease-in-out infinite alternate;
       }
 
-      .ai-particle {
-        position: absolute;
-        background: rgba(100, 255, 255, 0.6);
-        border-radius: 50%;
-        filter: blur(1px);
-        animation: float 15s infinite linear;
-      }
-
-      @keyframes float {
-        0% { transform: translateY(0) translateX(0); opacity: 0; }
-        50% { opacity: 0.8; }
-        100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-      }
-
       @keyframes backgroundMotion {
         0% {
           background-position: 0% 0%;
@@ -69,28 +55,6 @@
         transition: transform 0.5s ease;
         position: relative;
         overflow: hidden;
-      }
-
-      .card-glow::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(
-          to bottom right,
-          rgba(0, 255, 255, 0) 0%,
-          rgba(0, 255, 255, 0.1) 50%,
-          rgba(0, 255, 255, 0) 100%
-        );
-        transform: rotate(30deg);
-        animation: shine 6s infinite;
-      }
-
-      @keyframes shine {
-        0% { transform: translateX(-100%) rotate(30deg); }
-        100% { transform: translateX(100%) rotate(30deg); }
       }
 
       .interactive-row:hover {
@@ -117,10 +81,8 @@
         padding: 10px 20px;
         border-radius: 8px;
         margin-top: 20px;
-        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        transition: all 0.3s ease;
         box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
-        position: relative;
-        overflow: hidden;
       }
 
       .share-btn:hover {
@@ -129,41 +91,9 @@
         box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
       }
 
-      .share-btn::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(
-          to bottom right,
-          rgba(255, 255, 255, 0) 0%,
-          rgba(255, 255, 255, 0.3) 50%,
-          rgba(255, 255, 255, 0) 100%
-        );
-        transform: rotate(30deg);
-        animation: shine 3s infinite;
-      }
-
-      .tech-chip {
-        display: inline-block;
-        background: rgba(0, 255, 204, 0.2);
-        border: 1px solid #00ffcc;
-        border-radius: 20px;
-        padding: 4px 12px;
-        margin: 4px;
-        font-size: 0.8rem;
-        animation: pulse 4s infinite;
-      }
-
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); opacity: 0.8; }
-        50% { transform: scale(1.05); opacity: 1; }
-      }
-
       .profile-image {
         position: relative;
+        margin-bottom: 1.5rem;
       }
 
       .profile-image::after {
@@ -185,26 +115,11 @@
         100% { transform: scale(1.3); opacity: 0; }
       }
 
-      .ai-circuit {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-image: 
-          radial-gradient(circle at center, transparent 95%, rgba(0, 255, 204, 0.1) 100%),
-          linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px),
-          linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px);
-        background-size: 20px 20px;
-        z-index: -1;
-        opacity: 0.5;
-      }
-
       .specialty-item {
         display: flex;
         align-items: center;
         margin-bottom: 12px;
-        padding: 8px;
+        padding: 8px 12px;
         border-radius: 8px;
         background: rgba(0, 255, 204, 0.05);
         transition: all 0.3s ease;
@@ -216,40 +131,80 @@
       }
 
       .specialty-icon {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         margin-right: 12px;
         filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.7));
       }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .social-icon {
+        width: 32px;
+        height: 32px;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+      }
+
+      .social-icon:hover {
+        transform: scale(1.2) translateY(-3px);
+        filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
+      }
+
+      .about-me {
+        background: rgba(0, 255, 204, 0.1);
+        border-radius: 12px;
+        padding: 15px;
+        margin: 20px 0;
+        border-left: 3px solid #00ffcc;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      @media (min-width: 768px) {
+        .logo-container {
+          text-align: left;
+        }
+      }
     </style>
   </head>
-  <body class="min-h-screen flex items-center justify-center p-6">
-    <!-- Background Sound -->
-    <audio autoplay loop hidden>
-      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3b4562d145.mp3?filename=digital-technology-ambient-110408.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Animated AI-themed Background -->
+  <body class="min-h-screen flex items-center justify-center p-4 md:p-6">
+    <!-- Animated Background -->
     <div class="animated-bg"></div>
-    
-    <!-- AI Particles -->
-    <div id="particles"></div>
-
-    <!-- AI Circuit Background -->
-    <div class="ai-circuit"></div>
 
     <div
-      class="relative w-full max-w-3xl bg-white/10 backdrop-blur-md rounded-3xl p-10 flex flex-col md:flex-row items-center md:items-start md:justify-between card-glow"
+      class="relative w-full max-w-3xl bg-white/10 backdrop-blur-md rounded-3xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 card-glow"
       data-tilt
       data-tilt-max="5"
       data-tilt-speed="400"
     >
-      <!-- Left Info -->
-      <div class="md:w-2/3 space-y-6 animate__animated animate__fadeInLeft">
-        <img src="logo.png" alt="Skilliify Logo" class="h-24 animate-pulse" />
-        <h2 class="text-xl text-cyan-300 font-semibold tracking-wide">
-          Intelligence + Innovation
-        </h2>
+      <!-- Left Column - Contact Info -->
+      <div class="w-full md:w-2/3 space-y-6 animate__animated animate__fadeInLeft">
+        <!-- Logo centered on mobile -->
+        <div class="logo-container text-center md:text-left">
+          <img src="logo.png" alt="Skilliify Logo" class="h-20 md:h-24 mx-auto md:mx-0 animate-pulse" />
+        </div>
+
+        <!-- Profile Image - Visible only on mobile -->
+        <div class="md:hidden profile-image">
+          <img
+            src="sejal.jpg"
+            alt="Sejal Narwat"
+            class="w-28 h-28 mx-auto rounded-full object-cover border-4 border-cyan-300 shadow-lg hover:scale-105 transform transition duration-300"
+          />
+          <h3 class="text-2xl mt-2 font-bold text-cyan-200 text-center">Sejal Narwat</h3>
+          <p class="italic text-gray-300 text-center">Analytical Trainer</p>
+          
+          <!-- About Me Section (Mobile) -->
+          <div class="about-me mt-4">
+            <p>AI/ML expert with a passion for transforming complex concepts into accessible knowledge. Skilliify Certified Trainer specializing in practical, industry-relevant training programs.</p>
+          </div>
+        </div>
 
         <div class="space-y-4 text-base">
           <div class="flex items-center gap-3 interactive-row">
@@ -275,33 +230,51 @@
           </div>
         </div>
 
-        <!-- AI Tech Chips -->
-        <div class="mt-6">
-          <span class="tech-chip">AI Training</span>
-          <span class="tech-chip">Machine Learning</span>
-          <span class="tech-chip">Data Analytics</span>
-          <span class="tech-chip">Neural Networks</span>
+        <!-- Social Links -->
+        <div class="social-links">
+          <a href="https://www.linkedin.com/company/skilliify-ai/" target="_blank">
+            <img src="https://img.icons8.com/fluency/48/linkedin.png" class="social-icon" alt="LinkedIn Company" />
+          </a>
+          <a href="https://skilliifyai.blogspot.com/" target="_blank">
+            <img src="https://img.icons8.com/fluency/48/blogger.png" class="social-icon" alt="Blog" />
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61577358855190" target="_blank">
+            <img src="https://img.icons8.com/fluency/48/facebook-new.png" class="social-icon" alt="Facebook" />
+          </a>
+          <a href="https://www.instagram.com/skilliify.ai?igsh=MTV3OHpxemtwb3UyOA==" target="_blank">
+            <img src="https://img.icons8.com/fluency/48/instagram-new.png" class="social-icon" alt="Instagram" />
+          </a>
+          <a href="https://www.youtube.com/@SkilliifyAi" target="_blank">
+            <img src="https://img.icons8.com/fluency/48/youtube-play.png" class="social-icon" alt="YouTube" />
+          </a>
         </div>
 
-        <!-- Share Button -->
-        <button class="share-btn" onclick="shareCard()">🔗 Share This Card</button>
+        <!-- Share Button - Centered on mobile -->
+        <div class="flex justify-center md:justify-start">
+          <button class="share-btn" onclick="shareCard()">🔗 Share This Card</button>
+        </div>
       </div>
 
-      <!-- Right Profile -->
-      <div class="md:w-1/3 mt-10 md:mt-0 flex flex-col items-center animate__animated animate__fadeInRight">
+      <!-- Right Column - Profile (Hidden on mobile) -->
+      <div class="w-full md:w-1/3 flex flex-col items-center animate__animated animate__fadeInRight hidden md:flex">
         <div class="profile-image">
           <img
             src="sejal.jpg"
             alt="Sejal Narwat"
-            class="w-32 h-32 rounded-full object-cover border-4 border-cyan-300 shadow-lg hover:scale-105 transform transition duration-300"
+            class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-4 border-cyan-300 shadow-lg hover:scale-105 transform transition duration-300"
           />
         </div>
-        <h3 class="text-2xl mt-4 font-bold text-cyan-200">Sejal Narwat</h3>
-        <p class="italic text-gray-300">(Analytical Trainer)</p>
+        <h3 class="text-2xl mt-2 font-bold text-cyan-200 text-center">Sejal Narwat</h3>
+        <p class="italic text-gray-300 text-center">Analytical Trainer</p>
+        
+        <!-- About Me Section (Desktop) -->
+        <div class="about-me mt-4">
+          <p>AI/ML expert with a passion for transforming complex concepts into accessible knowledge. Skilliify Certified Trainer specializing in practical, industry-relevant training programs.</p>
+        </div>
 
         <!-- Training Specialties Section -->
         <div class="mt-6 w-full">
-          <h4 class="text-sm font-semibold text-cyan-300 mb-3 tracking-wider">TRAINING SPECIALTIES</h4>
+          <h4 class="text-sm font-semibold text-cyan-300 mb-3 tracking-wider text-center md:text-left">TRAINING SPECIALTIES</h4>
           
           <div class="specialty-item">
             <img src="https://img.icons8.com/color/48/artificial-intelligence.png" class="specialty-icon" />
@@ -332,43 +305,17 @@
     </div>
 
     <script>
-      VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
-      
-      // Create AI particles
-      function createParticles() {
-        const container = document.getElementById('particles') || document.body;
-        const particleCount = 30;
-        
-        for (let i = 0; i < particleCount; i++) {
-          const particle = document.createElement('div');
-          particle.classList.add('ai-particle');
-          
-          // Random size between 2px and 6px
-          const size = Math.random() * 4 + 2;
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
-          
-          // Random position
-          particle.style.left = `${Math.random() * 100}vw`;
-          particle.style.top = `${Math.random() * 100}vh`;
-          
-          // Random animation duration
-          particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
-          particle.style.animationDelay = `${Math.random() * 5}s`;
-          
-          container.appendChild(particle);
-        }
-      }
-      
-      // Initialize particles
-      createParticles();
+      VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+        glare: true,
+        "max-glare": 0.2,
+      });
 
       function shareCard() {
         const url = window.location.href;
         if (navigator.share) {
           navigator.share({
             title: 'Sejal Narwat | Skilliify.ai',
-            text: 'Check out Sejal Narwat's digital card',
+            text: 'Check out Sejal Narwat\'s digital card',
             url: url
           });
         } else {
