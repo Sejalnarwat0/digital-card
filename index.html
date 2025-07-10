@@ -1,82 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Skilliify.ai | Sejal Narwat</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://images.unsplash.com/photo-1581091870622-2c75f47b04f2?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-      background-size: cover;
-      z-index: -1;
-      opacity: 0.15;
-      filter: brightness(0.6) blur(1px);
-      animation: backgroundZoom 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes backgroundZoom {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.05); }
-    }
-
-    .glow {
-      animation: glowPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% {
-        box-shadow: 0 0 10px #d70909, 0 0 20px #38bdf8;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skilliify.ai | Sejal Narwat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;600&display=swap');
+      
+      body {
+        margin: 0;
+        font-family: 'Poppins', 'Segoe UI', sans-serif;
+        background-color: #0f172a;
+        color: white;
+        overflow-x: hidden;
       }
-      50% {
-        box-shadow: 0 0 20px #94ab1e, 0 0 40px #ba159c;
+
+      h1, h2, h3 {
+        font-family: 'Orbitron', sans-serif;
       }
-    }
-  </style>
-</head>
-<body class="bg-gradient-to-tr from-[#0f172a] to-[#1e293b] text-white font-sans flex items-center justify-center min-h-screen p-4">
 
-  <div class="bg-white/5 backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden max-w-2xl w-full flex flex-col md:flex-row items-center p-6 gap-6 border border-blue-800 glow">
+      .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        background: 
+          radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.15) 0%, transparent 25%),
+          radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.15) 0%, transparent 25%),
+          linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        animation: backgroundMotion 30s ease-in-out infinite alternate;
+      }
 
-    <!-- Left: Details -->
-    <div class="w-full md:w-2/3 space-y-4">
-      <img src="logo.png" alt="Skilliify Logo" class="h-16 md:h-20 animate-pulse" />
-      <p class="text-sm text-cyan-300 font-semibold">Intelligence + Innovation</p>
+      .ai-particle {
+        position: absolute;
+        background: rgba(100, 255, 255, 0.6);
+        border-radius: 50%;
+        filter: blur(1px);
+        animation: float 15s infinite linear;
+      }
 
-      <div class="space-y-2 text-sm md:text-base">
-        <div class="flex items-center gap-2">
-          <img src="https://img.icons8.com/color/48/gmail.png" class="h-5 md:h-6" alt="Email" />
-          <span>Sejalnarwat@skilliify.ai</span>
+      @keyframes float {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        50% { opacity: 0.8; }
+        100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+      }
+
+      @keyframes backgroundMotion {
+        0% {
+          background-position: 0% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
+
+      .card-glow {
+        border: 2px solid #00ffcc;
+        box-shadow: 0 0 25px #00ffcc, 0 0 50px #00ffcc33;
+        transition: transform 0.5s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-glow::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(0, 255, 255, 0) 0%,
+          rgba(0, 255, 255, 0.1) 50%,
+          rgba(0, 255, 255, 0) 100%
+        );
+        transform: rotate(30deg);
+        animation: shine 6s infinite;
+      }
+
+      @keyframes shine {
+        0% { transform: translateX(-100%) rotate(30deg); }
+        100% { transform: translateX(100%) rotate(30deg); }
+      }
+
+      .interactive-row:hover {
+        transform: translateX(5px);
+        transition: all 0.3s ease-in-out;
+        color: #67e8f9;
+        text-shadow: 0 0 10px rgba(103, 232, 249, 0.7);
+      }
+
+      .icon-bounce {
+        animation: bounceIcon 2s infinite;
+        filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.7));
+      }
+
+      @keyframes bounceIcon {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
+
+      .share-btn {
+        background-color: #00ffcc;
+        color: #0f172a;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .share-btn:hover {
+        transform: scale(1.05);
+        background-color: #00e6b8;
+        box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
+      }
+
+      .share-btn::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transform: rotate(30deg);
+        animation: shine 3s infinite;
+      }
+
+      .tech-chip {
+        display: inline-block;
+        background: rgba(0, 255, 204, 0.2);
+        border: 1px solid #00ffcc;
+        border-radius: 20px;
+        padding: 4px 12px;
+        margin: 4px;
+        font-size: 0.8rem;
+        animation: pulse 4s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.05); opacity: 1; }
+      }
+
+      .profile-image {
+        position: relative;
+      }
+
+      .profile-image::after {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border: 2px solid #00ffcc;
+        border-radius: 50%;
+        animation: pulse-ring 2s infinite;
+        pointer-events: none;
+      }
+
+      @keyframes pulse-ring {
+        0% { transform: scale(0.9); opacity: 0.7; }
+        70% { transform: scale(1.3); opacity: 0; }
+        100% { transform: scale(1.3); opacity: 0; }
+      }
+
+      .ai-circuit {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: 
+          radial-gradient(circle at center, transparent 95%, rgba(0, 255, 204, 0.1) 100%),
+          linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+          linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+        background-size: 20px 20px;
+        z-index: -1;
+        opacity: 0.5;
+      }
+
+      .specialty-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        padding: 8px;
+        border-radius: 8px;
+        background: rgba(0, 255, 204, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .specialty-item:hover {
+        background: rgba(0, 255, 204, 0.1);
+        transform: translateX(5px);
+      }
+
+      .specialty-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.7));
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-6">
+    <!-- Background Sound -->
+    <audio autoplay loop hidden>
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3b4562d145.mp3?filename=digital-technology-ambient-110408.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Animated AI-themed Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- AI Particles -->
+    <div id="particles"></div>
+
+    <!-- AI Circuit Background -->
+    <div class="ai-circuit"></div>
+
+    <div
+      class="relative w-full max-w-3xl bg-white/10 backdrop-blur-md rounded-3xl p-10 flex flex-col md:flex-row items-center md:items-start md:justify-between card-glow"
+      data-tilt
+      data-tilt-max="5"
+      data-tilt-speed="400"
+    >
+      <!-- Left Info -->
+      <div class="md:w-2/3 space-y-6 animate__animated animate__fadeInLeft">
+        <img src="logo.png" alt="Skilliify Logo" class="h-24 animate-pulse" />
+        <h2 class="text-xl text-cyan-300 font-semibold tracking-wide">
+          Intelligence + Innovation
+        </h2>
+
+        <div class="space-y-4 text-base">
+          <div class="flex items-center gap-3 interactive-row">
+            <img src="https://img.icons8.com/color/48/gmail.png" class="h-6 icon-bounce" />
+            <span>Sejalnarwat@skilliify.ai</span>
+          </div>
+          <div class="flex items-center gap-3 interactive-row">
+            <img src="https://img.icons8.com/color/48/phone.png" class="h-6 icon-bounce" />
+            <span>9560227810</span>
+          </div>
+          <div class="flex items-center gap-3 interactive-row">
+            <img src="https://img.icons8.com/color/48/domain.png" class="h-6 icon-bounce" />
+            <a href="https://www.skilliify.ai" class="hover:underline" target="_blank">www.skilliify.ai</a>
+          </div>
+          <div class="flex items-center gap-3 interactive-row">
+            <img src="https://img.icons8.com/fluency/48/linkedin.png" class="h-6 icon-bounce" />
+            <a
+              href="https://www.linkedin.com/in/sejal-narwat/"
+              class="hover:underline break-all"
+              target="_blank"
+              >linkedin.com/in/sejal-narwat</a
+            >
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <img src="https://img.icons8.com/color/48/phone.png" class="h-5 md:h-6" alt="Phone" />
-          <span>9560227810</span>
+
+        <!-- AI Tech Chips -->
+        <div class="mt-6">
+          <span class="tech-chip">AI Training</span>
+          <span class="tech-chip">Machine Learning</span>
+          <span class="tech-chip">Data Analytics</span>
+          <span class="tech-chip">Neural Networks</span>
         </div>
-        <div class="flex items-center gap-2">
-          <img src="https://img.icons8.com/color/48/domain.png" class="h-5 md:h-6" alt="Website" />
-          <a href="https://www.skilliify.ai" target="_blank" class="text-blue-400 hover:underline">www.skilliify.ai</a>
+
+        <!-- Share Button -->
+        <button class="share-btn" onclick="shareCard()">🔗 Share This Card</button>
+      </div>
+
+      <!-- Right Profile -->
+      <div class="md:w-1/3 mt-10 md:mt-0 flex flex-col items-center animate__animated animate__fadeInRight">
+        <div class="profile-image">
+          <img
+            src="sejal.jpg"
+            alt="Sejal Narwat"
+            class="w-32 h-32 rounded-full object-cover border-4 border-cyan-300 shadow-lg hover:scale-105 transform transition duration-300"
+          />
         </div>
-        <div class="flex items-center gap-2">
-          <img src="https://img.icons8.com/fluency/48/linkedin.png" class="h-5 md:h-6" alt="LinkedIn" />
-          <a href="https://www.linkedin.com/company/skilliify-ai/" target="_blank" class="text-blue-400 hover:underline break-all">https://www.linkedin.com/company/skilliify-ai/</a>
+        <h3 class="text-2xl mt-4 font-bold text-cyan-200">Sejal Narwat</h3>
+        <p class="italic text-gray-300">(Analytical Trainer)</p>
+
+        <!-- Training Specialties Section -->
+        <div class="mt-6 w-full">
+          <h4 class="text-sm font-semibold text-cyan-300 mb-3 tracking-wider">TRAINING SPECIALTIES</h4>
+          
+          <div class="specialty-item">
+            <img src="https://img.icons8.com/color/48/artificial-intelligence.png" class="specialty-icon" />
+            <span>AI Fundamentals</span>
+          </div>
+          
+          <div class="specialty-item">
+            <img src="https://img.icons8.com/color/48/machine-learning.png" class="specialty-icon" />
+            <span>Machine Learning</span>
+          </div>
+          
+          <div class="specialty-item">
+            <img src="https://img.icons8.com/color/48/data-analysis.png" class="specialty-icon" />
+            <span>Data Analytics</span>
+          </div>
+          
+          <div class="specialty-item">
+            <img src="https://img.icons8.com/color/48/brain.png" class="specialty-icon" />
+            <span>Neural Networks</span>
+          </div>
+          
+          <div class="specialty-item">
+            <img src="https://img.icons8.com/color/48/statistics.png" class="specialty-icon" />
+            <span>Predictive Modeling</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Right: Profile -->
-    <div class="w-full md:w-1/3 flex flex-col items-center text-center space-y-3">
-      <img src="sejal.jpg" alt="Sejal Narwat" class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-4 border-blue-400 shadow-lg animate-pulse" />
-      <h2 class="text-xl md:text-2xl font-bold">Sejal Narwat</h2>
-      <p class="text-sm text-gray-300 italic">(Analytical Trainer)</p>
-    </div>
+    <script>
+      VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+      
+      // Create AI particles
+      function createParticles() {
+        const container = document.getElementById('particles') || document.body;
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('ai-particle');
+          
+          // Random size between 2px and 6px
+          const size = Math.random() * 4 + 2;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          
+          // Random position
+          particle.style.left = `${Math.random() * 100}vw`;
+          particle.style.top = `${Math.random() * 100}vh`;
+          
+          // Random animation duration
+          particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+          particle.style.animationDelay = `${Math.random() * 5}s`;
+          
+          container.appendChild(particle);
+        }
+      }
+      
+      // Initialize particles
+      createParticles();
 
-  </div>
-
-</body>
+      function shareCard() {
+        const url = window.location.href;
+        if (navigator.share) {
+          navigator.share({
+            title: 'Sejal Narwat | Skilliify.ai',
+            text: 'Check out Sejal Narwat's digital card',
+            url: url
+          });
+        } else {
+          navigator.clipboard.writeText(url);
+          alert("Link copied to clipboard!");
+        }
+      }
+    </script>
+  </body>
 </html>
